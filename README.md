@@ -26,7 +26,7 @@ A human-like activity simulator designed to prevent computer systems from enteri
 
 ### 1. Clone & Setup
 ```bash
-git clone https://github.com/Jay-Dee0/Web-Tool.git
+git clone https://github.com/joseflkD/Web-Tool.git
 cd Web-Tool
 python3 -m venv venv
 ```

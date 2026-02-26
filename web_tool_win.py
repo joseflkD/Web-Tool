@@ -22,6 +22,7 @@ class WebToolWin:
         self.thread = None
         self.last_logged_title = ""
         self.last_bot_action_done = time.time()
+        self.startup_grace_until = time.time() + 3  # Ignore input events for 3s on startup
 
         self.user32 = ctypes.windll.user32
 
@@ -48,20 +49,28 @@ class WebToolWin:
         )
         self.mouse_listener.start()
 
+    def _should_trigger_pause(self):
+        """Returns True only if we're past the startup grace period and the bot isn't acting."""
+        return (
+            time.time() > self.startup_grace_until
+            and not self.is_bot_moving
+            and (time.time() - self.last_bot_action_done > 1.5)
+        )
+
     def on_key_press(self, key):
-        if not self.is_bot_moving and (time.time() - self.last_bot_action_done > 1.5):
+        if self._should_trigger_pause():
             self.trigger_auto_pause()
 
     def on_mouse_move(self, x, y):
-        if not self.is_bot_moving and (time.time() - self.last_bot_action_done > 1.5):
+        if self._should_trigger_pause():
             self.trigger_auto_pause()
 
     def on_mouse_click(self, x, y, button, pressed):
-        if not self.is_bot_moving and (time.time() - self.last_bot_action_done > 1.5):
+        if self._should_trigger_pause():
             self.trigger_auto_pause()
 
     def on_mouse_scroll(self, x, y, dx, dy):
-        if not self.is_bot_moving and (time.time() - self.last_bot_action_done > 1.5):
+        if self._should_trigger_pause():
             self.trigger_auto_pause()
 
     def trigger_auto_pause(self):
@@ -83,6 +92,7 @@ class WebToolWin:
 
     def resume_simulation(self):
         self.is_paused_by_user = self.is_paused_by_auto = False
+        self.startup_grace_until = time.time() + 1.5  # Ignore the F9 keypress that just resumed us
         self.log("Resuming Simulation...")
         self.update_tray_state("green")
 

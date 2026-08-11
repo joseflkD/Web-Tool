@@ -21,7 +21,8 @@ IDE_APPS = [
     'code', 'vscode', 'visual studio code', 'pycharm', 'intellij', 'webstorm',
     'phpstorm', 'sublime', 'atom', 'vim', 'emacs', 'neovim', 'eclipse',
     'netbeans', 'android studio', 'xcode', 'cursor', 'antigravity',
-    'windows terminal', 'cmd', 'powershell', 'git bash', 'alacritty', 'wt', 'terminal'
+    'windows terminal', 'cmd', 'powershell', 'git bash', 'alacritty', 'wt', 'terminal',
+    'claude', 'node', 'sh', 'bash'
 ]
 
 BROWSER_APPS = [

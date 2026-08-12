@@ -22,7 +22,7 @@ IDE_APPS = [
     'phpstorm', 'sublime', 'atom', 'vim', 'emacs', 'neovim', 'eclipse',
     'netbeans', 'android studio', 'xcode', 'cursor', 'antigravity',
     'windows terminal', 'cmd', 'powershell', 'git bash', 'alacritty', 'wt', 'terminal',
-    'claude', 'node', 'sh', 'bash'
+    'claude', 'node', 'sh', 'bash', 'consolewindowclass', 'cascadia_hosting_window_class', 'mintty'
 ]
 
 BROWSER_APPS = [

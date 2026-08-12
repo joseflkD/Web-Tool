@@ -140,7 +140,11 @@ class WebToolWin:
             length = self.user32.GetWindowTextLengthW(hwnd)
             buf = ctypes.create_unicode_buffer(length + 1)
             self.user32.GetWindowTextW(hwnd, buf, length + 1)
-            title = buf.value.lower()
+            
+            class_buf = ctypes.create_unicode_buffer(256)
+            self.user32.GetClassNameW(hwnd, class_buf, 256)
+            
+            title = f"{buf.value} {class_buf.value}".lower()
             if title != self.last_logged_title:
                 self.last_logged_title = title
                 self.log(f"Active App Changed: '{title}'")
